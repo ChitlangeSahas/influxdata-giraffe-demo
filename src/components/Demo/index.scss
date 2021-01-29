@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap');
+
+.Demo {
+    display: flex;
+    font-family: "Rubik";
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    > .StoryBook {
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+
+        > .Title {
+            margin: 10px;
+            font-size: x-large;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        > .Items {
+            display: flex;
+            flex-direction: column;
+            font-weight: 100;
+            > .Item {
+                padding: 20px;
+                cursor: pointer;
+
+                &.Selected {
+                    color: rgb(255, 255, 255);
+                    background: linear-gradient(90deg, rgb(142, 31, 195) 0%, rgb(6, 111, 197) 100%);
+                }
+            }
+        }
+    }
+
+    > .PlayGround {
+        flex: 5;
+    }
+}

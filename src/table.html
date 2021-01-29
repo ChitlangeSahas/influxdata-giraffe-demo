@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Giraffe</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@influxdata/giraffe"></script>
+</head>
+
+<body id="home">
+<main id="root"></main>
+<script type="text/javascript">
+    import {HoverTimeProvider} from "@influxdata/giraffe";
+
+    class PlotRenderer extends React.Component {
+        render() {
+            const style = {
+                width: "calc(70vw - 20px)",
+                height: "calc(70vh - 20px)",
+                margin: "40px",
+            };
+
+        const lineLayer = {
+            type: "line",
+            x: "_time",
+            y: "_value"
+        };
+
+            const fluxResponse = `#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string,string,string,string
+#group,false,false,true,true,false,false,true,true,true,true
+#default,_result,,,,,,,,,
+,result,table,_start,_stop,_time,_value,_field,_measurement,example,location
+,,0,2020-03-25T20:58:15.731129Z,2020-04-24T20:58:15.731129Z,2020-04-03T18:31:33.95Z,29.9,value,temperature,index.html,browser
+,,0,2020-03-25T20:58:15.731129Z,2020-04-24T20:58:15.731129Z,2020-04-03T18:55:23.863Z,28.7,value,temperature,index.html,browser
+,,0,2020-03-25T20:58:15.731129Z,2020-04-24T20:58:15.731129Z,2020-04-03T19:50:52.357Z,15,value,temperature,index.html,browser
+,,0,2020-03-25T20:58:15.731129Z,2020-04-24T20:58:15.731129Z,2020-04-03T19:53:37.198Z,24.8,value,temperature,index.html,browser
+,,0,2020-03-25T20:58:15.731129Z,2020-04-24T20:58:15.731129Z,2020-04-03T19:53:53.033Z,23,value,temperature,index.html,browser
+,,0,2020-03-25T20:58:15.731129Z,2020-04-24T20:58:15.731129Z,2020-04-03T20:19:21.88Z,20.1,value,temperature,index.html,browser
+,,0,2020-03-25T20:58:15.731129Z,2020-04-24T20:58:15.731129Z,2020-04-10T22:20:40.776Z,28.7,value,temperature,index.html,browser
+`
+          const layer = {
+              type: 'table',
+              timeZone:'America/Phoenix',
+              properties: {
+                  colors: {
+                      id: "_time",
+                      type: 'min',
+                      hex: "#000000",
+                      name: "Black",
+                      value: 10
+                  },
+                  tableOptions: {
+                      fixFirstColumn: false,
+                      verticalTimeAxis: false,
+                      sortBy : {
+                          internalName: "_time",
+                          displayName: "_time",
+                          visible: true
+                      }
+                  },
+                  fieldOptions: {
+                      internalName: "_time",
+                      displayName: "_time",
+                      visible: true
+                  },
+                  timeFormat: 'YYYY-MM-DD HH:mm:ss ZZ',
+                  decimalPlaces: {
+                      isEnforced: true,
+                      digits: 3
+                  }
+              }
+          }
+            const config = {
+                fluxResponse,
+                layers: [layer]
+            };
+            const SimplePlot = React.createElement(<HoverTimeProvider>Giraffe.Plot</HoverTimeProvider>, {config}, null);
+            return React.createElement('div', {style}, SimplePlot);
+        }
+    }
+    ReactDOM.render(
+        React.createElement(PlotRenderer),
+        document.getElementById('root')
+    );
+</script>
+</body>
+</html>

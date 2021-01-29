@@ -1,0 +1,10 @@
+{
+  "version": "v1",
+  "packages": {
+    "@influxdata/giraffe": {
+      "signature": "89652637cb2eeb76fc56ee8a7b2480c2",
+      "file": true,
+      "replaced": "^1.0.1"
+    }
+  }
+}
