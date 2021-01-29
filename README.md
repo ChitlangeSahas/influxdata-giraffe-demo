@@ -3,7 +3,6 @@
 
 The following layers are currently demo-ed in the app:
 ```
-BandLayer
 GaugeLayer 
 HeatMapLayer
 HistogramLayer
